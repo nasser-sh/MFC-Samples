@@ -1,3 +1,8 @@
+/*   Copyright (c) nasser-sh 2016
+ *
+ *   Distributed under BSD-style license. See accompanying LICENSE.txt in project
+ *   directory.
+ */
 #include "Fibonacci.h"
 #include "FibonacciDialog.h"
 #include "resource.h"
