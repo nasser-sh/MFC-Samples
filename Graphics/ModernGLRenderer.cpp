@@ -1,3 +1,8 @@
+/*   Copyright (c) nasser-sh 2016
+ *
+ *   Distributed under BSD-style license. See accompanying LICENSE.txt in project
+ *   directory.
+ */
 #include <afxwin.h>
 #include <gl/GL.h>
 #include "ModernGLRenderer.h"
