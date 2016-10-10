@@ -4,7 +4,7 @@
 *   directory.
 */
 #include "GLWindow.h"
-#include <gl/GL.h>
+#include "GLRenderer.h"
 
 
 using namespace graphics;
@@ -14,6 +14,7 @@ BEGIN_MESSAGE_MAP(CGLWindow, CFrameWnd)
     ON_WM_CREATE()
     ON_WM_ERASEBKGND()
     ON_WM_PAINT()
+    ON_WM_SIZE()
 END_MESSAGE_MAP()
 
 
@@ -47,17 +48,7 @@ int CGLWindow::OnCreate(LPCREATESTRUCT pCreateStruct)
 
     m_hGLRC = wglCreateContext(hDC);
     wglMakeCurrent(hDC, m_hGLRC);
-    
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-    
-    glEnable(GL_BLEND);
-    glEnable(GL_LINE_SMOOTH);
-    glEnable(GL_POLYGON_SMOOTH);
-
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glHint(GL_LINE_SMOOTH_HINT, GL_DONT_CARE);
-    glHint(GL_POLYGON_SMOOTH_HINT, GL_DONT_CARE);
-
+    glrenderer::Init();
     wglMakeCurrent(0, 0);
     return 0;
 }
@@ -76,21 +67,17 @@ BOOL CGLWindow::OnEraseBkgnd(CDC *pDC)
 void CGLWindow::OnPaint()
 {
     HDC hDC = GetDC()->GetSafeHdc();
-    CRect clientRect;
-    GetClientRect(clientRect);
-
     wglMakeCurrent(hDC, m_hGLRC);
-    
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glViewport(0, 0, clientRect.Width(), clientRect.Height());
-
-    glBegin(GL_TRIANGLES);
-    glColor3f(0.0f, 1.0f, 1.0f);
-    glVertex3f(0.5f, -0.5f, 0.0f);
-    glVertex3f(-0.5f, -0.5f, 0.0f);
-    glVertex3f(0.0f, 0.5f, 0.0f);
-    glEnd();
-
+    glrenderer::Draw();
     SwapBuffers(hDC);
+    wglMakeCurrent(0, 0);
+}
+
+
+void CGLWindow::OnSize(UINT nType, int cx, int cy)
+{
+    HDC hDC = GetDC()->GetSafeHdc();
+    wglMakeCurrent(hDC, m_hGLRC);
+    glrenderer::ResizeViewport(cx, cy);
     wglMakeCurrent(0, 0);
 }

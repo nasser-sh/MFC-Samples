@@ -154,6 +154,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="GLRenderer.h" />
     <ClInclude Include="GLWindow.h" />
     <ClInclude Include="GraphicsApp.h" />
     <ClInclude Include="MainDialog.h" />
@@ -161,6 +162,7 @@
     <ClInclude Include="SettingsDialog.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GLRenderer.cpp" />
     <ClCompile Include="GLWindow.cpp" />
     <ClCompile Include="GraphicsApp.cpp" />
     <ClCompile Include="MainDialog.cpp" />

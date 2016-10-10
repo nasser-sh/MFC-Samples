@@ -6,6 +6,7 @@
 #pragma once
 #include <afxwin.h>
 
+
 namespace graphics
 {
     class CGLWindow : public CFrameWnd
@@ -21,6 +22,7 @@ namespace graphics
         afx_msg int OnCreate(LPCREATESTRUCT pCreateStruct);
         afx_msg BOOL OnEraseBkgnd(CDC* pDC); 
         afx_msg void OnPaint();
+        afx_msg void OnSize(UINT nType, int cx, int cy);
         DECLARE_MESSAGE_MAP()
     };
 }
