@@ -158,6 +158,7 @@
     <ClInclude Include="GLWindow.h" />
     <ClInclude Include="GraphicsApp.h" />
     <ClInclude Include="MainDialog.h" />
+    <ClInclude Include="ModernGLWindow.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SettingsDialog.h" />
   </ItemGroup>
@@ -166,6 +167,7 @@
     <ClCompile Include="GLWindow.cpp" />
     <ClCompile Include="GraphicsApp.cpp" />
     <ClCompile Include="MainDialog.cpp" />
+    <ClCompile Include="ModernGLWindow.cpp" />
     <ClCompile Include="SettingsDialog.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -5,6 +5,7 @@
 */
 #include "MainDialog.h"
 #include "GLWindow.h"
+#include "ModernGLWindow.h"
 #include "SettingsDialog.h"
 
 
@@ -34,7 +35,10 @@ void CMainDialog::OnFixedFunctionGLWindow()
 
 void CMainDialog::OnModernGLWindow()
 {
-    AfxMessageBox(L"Modern OpenGL");
+    CModernGLWindow *pGLWindow = new CModernGLWindow;
+    pGLWindow->Create(nullptr, L"Modern OpenGL");
+    pGLWindow->UpdateWindow();
+    pGLWindow->ShowWindow(SW_SHOW);
 }
 
 

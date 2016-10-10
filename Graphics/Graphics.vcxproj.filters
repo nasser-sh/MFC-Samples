@@ -39,6 +39,9 @@
     <ClInclude Include="GLRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ModernGLWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsApp.cpp">
@@ -54,6 +57,9 @@
       <Filter>Source Files\Dialogs</Filter>
     </ClCompile>
     <ClCompile Include="GLRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ModernGLWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

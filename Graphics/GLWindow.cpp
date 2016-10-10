@@ -48,7 +48,7 @@ int CGLWindow::OnCreate(LPCREATESTRUCT pCreateStruct)
 
     m_hGLRC = wglCreateContext(hDC);
     wglMakeCurrent(hDC, m_hGLRC);
-    glrenderer::Init();
+    ffgl::Init();
     wglMakeCurrent(0, 0);
     return 0;
 }
@@ -68,7 +68,7 @@ void CGLWindow::OnPaint()
 {
     HDC hDC = GetDC()->GetSafeHdc();
     wglMakeCurrent(hDC, m_hGLRC);
-    glrenderer::Draw();
+    ffgl::Draw();
     SwapBuffers(hDC);
     wglMakeCurrent(0, 0);
 }
@@ -78,6 +78,6 @@ void CGLWindow::OnSize(UINT nType, int cx, int cy)
 {
     HDC hDC = GetDC()->GetSafeHdc();
     wglMakeCurrent(hDC, m_hGLRC);
-    glrenderer::ResizeViewport(cx, cy);
+    ffgl::ResizeViewport(cx, cy);
     wglMakeCurrent(0, 0);
 }

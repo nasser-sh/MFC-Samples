@@ -8,11 +8,9 @@
 #include "GLRenderer.h"
 
 
-using namespace graphics;
+namespace graphics {
+namespace ffgl {
 
-
-namespace glrenderer 
-{
     void Init()
     {
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -43,4 +41,5 @@ namespace glrenderer
     {
         glViewport(0, 0, width, height);
     }
-}
+
+} }

@@ -7,7 +7,7 @@
 
 
 namespace graphics {
-namespace glrenderer {
+namespace ffgl {
 
     void Init();
     void Draw();
