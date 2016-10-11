@@ -1,4 +1,11 @@
+/*   Copyright (c) nasser-sh 2016
+ *
+ *   Distributed under BSD-style license. See accompanying LICENSE.txt in project
+ *   directory.
+ */
 #include "ModernGLWindow.h"
+#include "ModernGLRenderer.h"
+#include "WindowsGL.h"
 
 
 using namespace graphics;
@@ -18,7 +25,12 @@ int CModernGLWindow::OnCreate(LPCREATESTRUCT pCreateStruct)
         return -1;
     }
 
+    HDC hDC = GetDC()->GetSafeHdc();
+    m_hGLRC = windowsgl::CreateModernGLContext(hDC, 3, 3);
 
+    wglMakeCurrent(hDC, m_hGLRC);
+    moderngl::Init();
+    wglMakeCurrent(0, 0);
     return 0;
 }
 
@@ -37,7 +49,7 @@ void CModernGLWindow::OnPaint()
 {
     HDC hDC = GetDC()->GetSafeHdc();
     wglMakeCurrent(hDC, m_hGLRC);
-
+    moderngl::Draw();
     SwapBuffers(hDC);
     wglMakeCurrent(0, 0);
 }
@@ -47,6 +59,6 @@ void CModernGLWindow::OnSize(UINT nType, int cx, int cy)
 {
     HDC hDC = GetDC()->GetSafeHdc();
     wglMakeCurrent(hDC, m_hGLRC);
-
+    moderngl::ResizeViewport(cx, cy);
     wglMakeCurrent(0, 0);
 }

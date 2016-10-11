@@ -154,21 +154,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="glext.h" />
     <ClInclude Include="GLRenderer.h" />
     <ClInclude Include="GLWindow.h" />
     <ClInclude Include="GraphicsApp.h" />
     <ClInclude Include="MainDialog.h" />
+    <ClInclude Include="ModernGLRenderer.h" />
     <ClInclude Include="ModernGLWindow.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SettingsDialog.h" />
+    <ClInclude Include="wglext.h" />
+    <ClInclude Include="WindowsGL.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GLRenderer.cpp" />
     <ClCompile Include="GLWindow.cpp" />
     <ClCompile Include="GraphicsApp.cpp" />
     <ClCompile Include="MainDialog.cpp" />
+    <ClCompile Include="ModernGLRenderer.cpp" />
     <ClCompile Include="ModernGLWindow.cpp" />
     <ClCompile Include="SettingsDialog.cpp" />
+    <ClCompile Include="WindowsGL.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Graphics.rc" />
