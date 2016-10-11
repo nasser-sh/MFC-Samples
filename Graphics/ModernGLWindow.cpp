@@ -29,7 +29,7 @@ int CModernGLWindow::OnCreate(LPCREATESTRUCT pCreateStruct)
     m_hGLRC = windowsgl::CreateModernGLContext(hDC, 3, 3);
 
     wglMakeCurrent(hDC, m_hGLRC);
-    moderngl::Init();
+    m_renderer.Init();
     wglMakeCurrent(0, 0);
     return 0;
 }
@@ -49,7 +49,7 @@ void CModernGLWindow::OnPaint()
 {
     HDC hDC = GetDC()->GetSafeHdc();
     wglMakeCurrent(hDC, m_hGLRC);
-    moderngl::Draw();
+    m_renderer.Draw();
     SwapBuffers(hDC);
     wglMakeCurrent(0, 0);
 }
@@ -59,6 +59,6 @@ void CModernGLWindow::OnSize(UINT nType, int cx, int cy)
 {
     HDC hDC = GetDC()->GetSafeHdc();
     wglMakeCurrent(hDC, m_hGLRC);
-    moderngl::ResizeViewport(cx, cy);
+    m_renderer.ResizeViewport(cx, cy);
     wglMakeCurrent(0, 0);
 }

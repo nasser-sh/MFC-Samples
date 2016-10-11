@@ -5,6 +5,7 @@
  */
 #pragma once
 #include <afxwin.h>
+#include "ModernGLRenderer.h"
 
 
 namespace graphics
@@ -17,6 +18,7 @@ namespace graphics
 
     private:
         HGLRC m_hGLRC;
+        moderngl::CRenderer m_renderer;
 
     protected:
         afx_msg int OnCreate(LPCREATESTRUCT pCreateStruct);

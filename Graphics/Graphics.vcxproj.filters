@@ -19,6 +19,9 @@
     <Filter Include="Source Files\Dialogs">
       <UniqueIdentifier>{13bfbc31-4b14-491f-9172-4f237f365a95}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{bdc6169b-3d5d-4b5e-a98b-355dfb38a747}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsApp.h">
@@ -85,5 +88,13 @@
     <ResourceCompile Include="Graphics.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="vertex.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="fragment.glsl">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

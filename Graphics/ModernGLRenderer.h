@@ -4,14 +4,23 @@
  *   directory.
  */
 #pragma once
+#include "WindowsGL.h"
 
 
 namespace graphics {
 namespace moderngl {
 
-    void Init();
-    void Draw();
-    void ResizeViewport(int width, int height);
-
+    class CRenderer
+    {
+    public:
+        void Init();
+        void Draw();
+        void ResizeViewport(int width, int height);
+    
+    private:
+        GLuint m_vertexArrayObject;
+        GLuint m_vertexBufferObject;
+        GLuint m_program;
+    };
 } }
 
