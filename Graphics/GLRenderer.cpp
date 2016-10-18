@@ -3,9 +3,9 @@
  *   Distributed under BSD-style license. See accompanying LICENSE.txt in project
  *   directory.
  */
-#include <afxwin.h>
-#include <gl/GL.h>
 #include "GLRenderer.h"
+
+#include "PlatformGL.h"
 
 
 namespace graphics {

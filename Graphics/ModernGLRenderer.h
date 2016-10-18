@@ -4,7 +4,7 @@
  *   directory.
  */
 #pragma once
-#include "WindowsGL.h"
+#include "PlatformGL.h"
 
 
 namespace graphics {

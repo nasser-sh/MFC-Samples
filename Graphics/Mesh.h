@@ -5,7 +5,7 @@
  */
 #pragma once
 #include <vector>
-#include "WindowsGL.h"
+#include "PlatformGL.h"
 #include "Vec3.h"
 
 

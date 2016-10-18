@@ -4,9 +4,11 @@
  *   directory.
  */
 #include "ModernGLRenderer.h"
-#include "WindowsGL.h"
+
 #include <fstream>
 #include <string>
+#include "PlatformGL.h"
+
 
 
 namespace

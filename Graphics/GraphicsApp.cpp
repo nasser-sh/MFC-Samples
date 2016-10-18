@@ -4,6 +4,7 @@
 *   directory.
 */
 #include "GraphicsApp.h"
+
 #include "MainDialog.h"
 
 

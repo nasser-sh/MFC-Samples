@@ -4,8 +4,9 @@
 *   directory.
 */
 #include "GLWindow.h"
+
 #include "GLRenderer.h"
-#include "WindowsGL.h"
+#include "PlatformGL.h"
 
 
 using namespace graphics;

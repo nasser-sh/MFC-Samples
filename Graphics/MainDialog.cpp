@@ -4,6 +4,7 @@
 *   directory.
 */
 #include "MainDialog.h"
+
 #include "GLWindow.h"
 #include "ModernGLWindow.h"
 #include "SettingsDialog.h"

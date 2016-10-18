@@ -4,6 +4,7 @@
  *   directory.
  */
 #include "Mesh.h"
+
 #include <cassert>
 #include <fstream>
 #include <string>

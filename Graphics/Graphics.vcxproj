@@ -162,6 +162,7 @@
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="ModernGLRenderer.h" />
     <ClInclude Include="ModernGLWindow.h" />
+    <ClInclude Include="PlatformGL.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SettingsDialog.h" />
     <ClInclude Include="Vec3.h" />
