@@ -159,10 +159,12 @@
     <ClInclude Include="GLWindow.h" />
     <ClInclude Include="GraphicsApp.h" />
     <ClInclude Include="MainDialog.h" />
+    <ClInclude Include="Mesh.h" />
     <ClInclude Include="ModernGLRenderer.h" />
     <ClInclude Include="ModernGLWindow.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SettingsDialog.h" />
+    <ClInclude Include="Vec3.h" />
     <ClInclude Include="wglext.h" />
     <ClInclude Include="WindowsGL.h" />
   </ItemGroup>
@@ -171,9 +173,11 @@
     <ClCompile Include="GLWindow.cpp" />
     <ClCompile Include="GraphicsApp.cpp" />
     <ClCompile Include="MainDialog.cpp" />
+    <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="ModernGLRenderer.cpp" />
     <ClCompile Include="ModernGLWindow.cpp" />
     <ClCompile Include="SettingsDialog.cpp" />
+    <ClCompile Include="Vec3.cpp" />
     <ClCompile Include="WindowsGL.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +185,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="fragment.glsl" />
+    <None Include="suzanne.wavefront" />
     <None Include="vertex.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

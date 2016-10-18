@@ -22,6 +22,9 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{bdc6169b-3d5d-4b5e-a98b-355dfb38a747}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Wavefront OBJ Files">
+      <UniqueIdentifier>{e981db17-00ae-4672-b3b7-b1b0f12e3559}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsApp.h">
@@ -57,6 +60,12 @@
     <ClInclude Include="WindowsGL.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Vec3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsApp.cpp">
@@ -83,6 +92,12 @@
     <ClCompile Include="WindowsGL.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Vec3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Graphics.rc">
@@ -95,6 +110,9 @@
     </None>
     <None Include="fragment.glsl">
       <Filter>Shaders</Filter>
+    </None>
+    <None Include="suzanne.wavefront">
+      <Filter>Wavefront OBJ Files</Filter>
     </None>
   </ItemGroup>
 </Project>

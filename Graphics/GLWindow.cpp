@@ -45,6 +45,8 @@ int CGLWindow::OnCreate(LPCREATESTRUCT pCreateStruct)
     wglMakeCurrent(hDC, m_hGLRC);
     ffgl::Init();
     wglMakeCurrent(0, 0);
+
+    m_mesh = CMesh::FromWavefrontObjFile("suzanne.wavefront");
     return 0;
 }
 
@@ -63,7 +65,7 @@ void CGLWindow::OnPaint()
 {
     HDC hDC = GetDC()->GetSafeHdc();
     wglMakeCurrent(hDC, m_hGLRC);
-    ffgl::Draw();
+    ffgl::Draw(m_mesh);
     SwapBuffers(hDC);
     wglMakeCurrent(0, 0);
 }

@@ -4,13 +4,14 @@
  *   directory.
  */
 #pragma once
+#include "Mesh.h"
 
 
 namespace graphics {
 namespace ffgl {
 
     void Init();
-    void Draw();
+    void Draw(CMesh const &mesh);
     void ResizeViewport(int width, int height);
 
 } }

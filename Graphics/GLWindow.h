@@ -1,8 +1,3 @@
-/*   Copyright (c) nasser-sh 2016
-*
-*   Distributed under BSD-style license. See accompanying LICENSE.txt in project
-*   directory.
-*/
 #pragma once
 /*   Copyright (c) nasser-sh 2016
  *
@@ -10,6 +5,7 @@
  *   directory.
  */
 #include <afxwin.h>
+#include "Mesh.h"
 
 
 namespace graphics
@@ -22,6 +18,7 @@ namespace graphics
 
     private:
         HGLRC m_hGLRC;
+        CMesh m_mesh;
 
     protected:
         afx_msg int OnCreate(LPCREATESTRUCT pCreateStruct);
