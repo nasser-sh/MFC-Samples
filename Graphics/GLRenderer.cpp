@@ -22,13 +22,15 @@ namespace ffgl {
         glEnable(GL_LINE_SMOOTH);
         glEnable(GL_POLYGON_SMOOTH);
 
+        GLfloat lightPosition[] = { 0.0f, 0.0f, -2.0f, 1.0f };
+        glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
+
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glHint(GL_LINE_SMOOTH_HINT, GL_DONT_CARE);
         glHint(GL_POLYGON_SMOOTH_HINT, GL_DONT_CARE);
 
         glEnableClientState(GL_VERTEX_ARRAY);
         glEnableClientState(GL_NORMAL_ARRAY);
-
     }
 
 
