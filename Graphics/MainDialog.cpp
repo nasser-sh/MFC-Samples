@@ -5,9 +5,9 @@
 */
 #include "MainDialog.h"
 
-#include "GLWindow.h"
-#include "ModernGLWindow.h"
+#include "GraphicsApp.h"
 #include "SettingsDialog.h"
+#include <cassert>
 
 
 using namespace graphics;
@@ -20,26 +20,23 @@ BEGIN_MESSAGE_MAP(CMainDialog, CDialog)
 END_MESSAGE_MAP()
 
 
-CMainDialog::CMainDialog(CWnd *pParent)
+CMainDialog::CMainDialog(CGraphicsApp *pApp, CWnd *pParent)
 : CDialog(CMainDialog::IDD, pParent)
-{ }
+, m_pApp(pApp)
+{ 
+    assert(m_pApp != nullptr);
+}
 
 
 void CMainDialog::OnFixedFunctionGLWindow()
 {
-    CGLWindow *pGLWindow = new CGLWindow;
-    pGLWindow->Create(nullptr, L"Fixed Function GL");
-    pGLWindow->UpdateWindow();
-    pGLWindow->ShowWindow(SW_SHOW);
+    m_pApp->OnFixedFunctionGLWindow();
 }
 
 
 void CMainDialog::OnModernGLWindow()
 {
-    CModernGLWindow *pGLWindow = new CModernGLWindow;
-    pGLWindow->Create(nullptr, L"Modern OpenGL");
-    pGLWindow->UpdateWindow();
-    pGLWindow->ShowWindow(SW_SHOW);
+    m_pApp->OnModernGLWindow();
 }
 
 

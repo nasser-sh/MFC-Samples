@@ -5,7 +5,9 @@
 */
 #include "GraphicsApp.h"
 
+#include "GLWindow.h"
 #include "MainDialog.h"
+#include "ModernGLWindow.h"
 
 
 using namespace graphics;
@@ -16,7 +18,25 @@ CGraphicsApp theApp;
 
 BOOL CGraphicsApp::InitInstance()
 {
-    CMainDialog mainDialog;
+    CMainDialog mainDialog(this);
     mainDialog.DoModal();
     return FALSE;
+}
+
+
+void CGraphicsApp::OnFixedFunctionGLWindow()
+{
+    CGLWindow *pGLWindow = new CGLWindow;
+    pGLWindow->Create(nullptr, L"Fixed Function GL");
+    pGLWindow->UpdateWindow();
+    pGLWindow->ShowWindow(SW_SHOW);
+}
+
+
+void CGraphicsApp::OnModernGLWindow()
+{
+    CModernGLWindow *pGLWindow = new CModernGLWindow;
+    pGLWindow->Create(nullptr, L"Fixed Function GL");
+    pGLWindow->UpdateWindow();
+    pGLWindow->ShowWindow(SW_SHOW);
 }

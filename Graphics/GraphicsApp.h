@@ -14,7 +14,12 @@ namespace graphics
         CGraphicsApp() = default;
         virtual ~CGraphicsApp() = default;
 
+        // overrides
         BOOL InitInstance() override;
+
+        // callbacks
+        void OnFixedFunctionGLWindow();
+        void OnModernGLWindow();
     };
 }
 

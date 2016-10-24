@@ -9,13 +9,18 @@
 
 namespace graphics
 {
+    class CGraphicsApp;
+
     class CMainDialog : public CDialog
     {
     public:
         enum { IDD = IDD_MAIN_DIALOG };
 
-        CMainDialog(CWnd *pParent = nullptr);
+        CMainDialog(CGraphicsApp *pApp, CWnd *pParent = nullptr);
         virtual ~CMainDialog() = default;
+
+    private:
+        CGraphicsApp *m_pApp;
 
     protected:
         afx_msg void OnFixedFunctionGLWindow();
