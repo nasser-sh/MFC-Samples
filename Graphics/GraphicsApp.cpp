@@ -36,7 +36,7 @@ void CGraphicsApp::OnFixedFunctionGLWindow()
 void CGraphicsApp::OnModernGLWindow()
 {
     CModernGLWindow *pGLWindow = new CModernGLWindow;
-    pGLWindow->Create(nullptr, L"Fixed Function GL");
+    pGLWindow->Create(nullptr, L"Modern GL");
     pGLWindow->UpdateWindow();
     pGLWindow->ShowWindow(SW_SHOW);
 }
