@@ -5,13 +5,20 @@
 */
 #include "SettingsDialog.h"
 
+#include <cassert>
+#include "GraphicsApp.h"
+#include "Settings.h"
+
 
 using namespace graphics;
 
 
-CSettingsDialog::CSettingsDialog(CWnd *pParent)
+CSettingsDialog::CSettingsDialog(CGraphicsApp *pApp, CWnd *pParent)
 : CDialog(CSettingsDialog::IDD, pParent)
-{ }
+, m_pApp(pApp)
+{ 
+    assert(m_pApp != nullptr);
+}
 
 
 BOOL CSettingsDialog::OnInitDialog()
@@ -22,6 +29,16 @@ BOOL CSettingsDialog::OnInitDialog()
     pComboBox->AddString(_T("None"));
     return TRUE;
 }
+
+
+void CSettingsDialog::OnOK()
+{
+    UpdateData();
+
+    CSettings settings;
+    m_pApp->OnUpdateSettings(settings);
+}
+
 
 BEGIN_MESSAGE_MAP(CSettingsDialog, CDialog)
 END_MESSAGE_MAP()

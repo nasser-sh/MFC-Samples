@@ -5,6 +5,8 @@
 */
 #pragma once
 #include <afxwin.h>
+#include "Settings.h"
+
 
 namespace graphics
 {
@@ -20,6 +22,11 @@ namespace graphics
         // callbacks
         void OnFixedFunctionGLWindow();
         void OnModernGLWindow();
+        void OnSettingsDialog();
+        void OnUpdateSettings(CSettings const &settings);
+
+    private:
+        CSettings m_settings;
     };
 }
 

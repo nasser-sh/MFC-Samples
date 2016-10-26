@@ -8,6 +8,7 @@
 #include "GLWindow.h"
 #include "MainDialog.h"
 #include "ModernGLWindow.h"
+#include "SettingsDialog.h"
 
 
 using namespace graphics;
@@ -39,4 +40,17 @@ void CGraphicsApp::OnModernGLWindow()
     pGLWindow->Create(nullptr, L"Modern GL");
     pGLWindow->UpdateWindow();
     pGLWindow->ShowWindow(SW_SHOW);
+}
+
+
+void CGraphicsApp::OnSettingsDialog()
+{
+    CSettingsDialog settingsDialog(this);
+    settingsDialog.DoModal();
+}
+
+
+void CGraphicsApp::OnUpdateSettings(CSettings const &settings)
+{
+    m_settings = settings;
 }

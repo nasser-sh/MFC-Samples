@@ -42,6 +42,5 @@ void CMainDialog::OnModernGLWindow()
 
 void CMainDialog::OnSettings()
 {
-    CSettingsDialog settingsDialog;
-    settingsDialog.DoModal();
+    m_pApp->OnSettingsDialog();
 }
