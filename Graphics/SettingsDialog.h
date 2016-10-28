@@ -25,7 +25,6 @@ namespace graphics
         void OnOK() override;
 
     private:
-        CComboBox *m_pMsaaComboBox;
         CGraphicsApp *m_pApp;
 
     protected:
