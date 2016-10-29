@@ -25,6 +25,12 @@ BOOL CGraphicsApp::InitInstance()
 }
 
 
+CSettings const &CGraphicsApp::Settings() const
+{
+    return m_settings;
+}
+
+
 void CGraphicsApp::OnFixedFunctionGLWindow()
 {
     CGLWindow *pGLWindow = new CGLWindow;

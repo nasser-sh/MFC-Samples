@@ -6,6 +6,7 @@
 #pragma once
 #include <afxwin.h>
 #include "resource.h"
+#include "Settings.h"
 
 
 namespace graphics
@@ -21,11 +22,14 @@ namespace graphics
         CSettingsDialog(CGraphicsApp *pApp, CWnd *pParent = nullptr);
         virtual ~CSettingsDialog() = default;
 
+        void DoDataExchange(CDataExchange *pDX) override;
         BOOL OnInitDialog() override;
         void OnOK() override;
 
     private:
         CGraphicsApp *m_pApp;
+        CComboBox m_msaaComboBox;
+        CSettings m_settings;
 
     protected:
         DECLARE_MESSAGE_MAP()
