@@ -160,6 +160,7 @@
     <ClInclude Include="GraphicsApp.h" />
     <ClInclude Include="MainDialog.h" />
     <ClInclude Include="Mesh.h" />
+    <ClInclude Include="MeshLoaders.h" />
     <ClInclude Include="ModernGLRenderer.h" />
     <ClInclude Include="ModernGLWindow.h" />
     <ClInclude Include="PlatformGL.h" />
@@ -175,6 +176,7 @@
     <ClCompile Include="GraphicsApp.cpp" />
     <ClCompile Include="MainDialog.cpp" />
     <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="MeshLoaders.cpp" />
     <ClCompile Include="ModernGLRenderer.cpp" />
     <ClCompile Include="ModernGLWindow.cpp" />
     <ClCompile Include="SettingsDialog.cpp" />

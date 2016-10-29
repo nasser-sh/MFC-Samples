@@ -6,6 +6,7 @@
 #include "GLWindow.h"
 
 #include "GLRenderer.h"
+#include "MeshLoaders.h"
 #include "PlatformGL.h"
 
 
@@ -47,7 +48,7 @@ int CGLWindow::OnCreate(LPCREATESTRUCT pCreateStruct)
     ffgl::Init();
     wglMakeCurrent(0, 0);
 
-    m_mesh = CMesh::FromWavefrontObjFile("suzanne.wavefront");
+    m_mesh = mesh_loaders::LoadWavefrontObjFile("suzanne.wavefront");
     return 0;
 }
 

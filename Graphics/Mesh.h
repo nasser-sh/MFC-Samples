@@ -25,8 +25,6 @@ namespace graphics
             std::vector<Vec3> normals, 
             std::vector<GLushort> indices);
 
-        static CMesh FromWavefrontObjFile(std::string const &filename);
-
         std::vector<Vec3> const &Vertices() const;
         std::vector<Vec3> const &Normals() const;
         std::vector<GLushort> const &Indices() const;
