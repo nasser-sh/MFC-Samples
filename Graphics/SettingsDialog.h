@@ -11,25 +11,24 @@
 
 namespace graphics
 {
-    class CGraphicsApp;
-
-
     class CSettingsDialog : public CDialog
     {
     public:
         enum { IDD = IDD_SETTINGS_DIALOG };
 
-        CSettingsDialog(CGraphicsApp *pApp, CWnd *pParent = nullptr);
+        CSettingsDialog(CSettings const &settings, CWnd *pParent = nullptr);
         virtual ~CSettingsDialog() = default;
 
         void DoDataExchange(CDataExchange *pDX) override;
         BOOL OnInitDialog() override;
         void OnOK() override;
 
+        CSettings const &Settings() const;
+
     private:
-        CGraphicsApp *m_pApp;
         CComboBox m_msaaComboBox;
         CSettings m_settings;
+        bool m_isOkClicked;
 
     protected:
         DECLARE_MESSAGE_MAP()

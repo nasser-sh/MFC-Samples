@@ -19,9 +19,6 @@ namespace graphics
         // overrides
         BOOL InitInstance() override;
 
-        // member functions
-        CSettings const &Settings() const;
-
         // callbacks
         void OnFixedFunctionGLWindow();
         void OnModernGLWindow();

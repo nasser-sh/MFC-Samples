@@ -57,13 +57,11 @@ namespace
 }
 
 
-CSettingsDialog::CSettingsDialog(CGraphicsApp *pApp, CWnd *pParent)
+CSettingsDialog::CSettingsDialog(CSettings const &settings, CWnd *pParent)
 : CDialog(CSettingsDialog::IDD, pParent)
-, m_pApp(pApp)
-{ 
-    assert(m_pApp != nullptr);
-    m_settings = m_pApp->Settings();
-}
+, m_settings(settings)
+, m_isOkClicked(false)
+{ }
 
 
 void CSettingsDialog::DoDataExchange(CDataExchange *pDX)
@@ -92,7 +90,14 @@ BOOL CSettingsDialog::OnInitDialog()
 void CSettingsDialog::OnOK()
 {
     CDialog::OnOK();
-    m_pApp->OnUpdateSettings(m_settings);
+    m_isOkClicked = true;
+}
+
+
+CSettings const &CSettingsDialog::Settings() const
+{
+    assert(m_isOkClicked);
+    return m_settings;
 }
 
 

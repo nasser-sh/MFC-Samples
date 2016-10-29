@@ -25,12 +25,6 @@ BOOL CGraphicsApp::InitInstance()
 }
 
 
-CSettings const &CGraphicsApp::Settings() const
-{
-    return m_settings;
-}
-
-
 void CGraphicsApp::OnFixedFunctionGLWindow()
 {
     CGLWindow *pGLWindow = new CGLWindow;
@@ -51,8 +45,11 @@ void CGraphicsApp::OnModernGLWindow()
 
 void CGraphicsApp::OnSettingsDialog()
 {
-    CSettingsDialog settingsDialog(this);
-    settingsDialog.DoModal();
+    CSettingsDialog settingsDialog(m_settings);
+    
+    if (settingsDialog.DoModal() == IDOK) {
+        OnUpdateSettings(settingsDialog.Settings());
+    }
 }
 
 
