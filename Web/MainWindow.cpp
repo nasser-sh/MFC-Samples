@@ -29,7 +29,13 @@ int CMainWindow::OnCreate(LPCREATESTRUCT pCreateStruct)
         AFX_IDW_PANE_FIRST);
     assert(isCreated);
 
-    m_pHtmlView->Navigate2(_T("https://www.google.com"));
+    TCHAR currentDirectory[MAX_PATH];
+    GetCurrentDirectory(MAX_PATH, currentDirectory);
+
+    CString htmlPath;
+    htmlPath.Format(_T("file:///%s/html/index.html"), currentDirectory);
+
+    m_pHtmlView->Navigate2(htmlPath);
 
     return 0;
 }

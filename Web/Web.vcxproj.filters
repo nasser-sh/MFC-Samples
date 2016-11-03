@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Html">
+      <UniqueIdentifier>{e462e05b-8e47-44e0-963c-a3b3b5aafcc5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WebApp.h">
@@ -29,5 +32,13 @@
     <ClCompile Include="MainWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="html\index.html">
+      <Filter>Html</Filter>
+    </None>
+    <None Include="html\index.js">
+      <Filter>Html</Filter>
+    </None>
   </ItemGroup>
 </Project>
