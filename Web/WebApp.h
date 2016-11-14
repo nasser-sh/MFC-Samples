@@ -16,5 +16,7 @@ namespace web_app
         virtual ~CWebApp() = default;
 
         BOOL InitInstance() override;
+
+        void OnNewBrowser();
     };
 }

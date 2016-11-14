@@ -150,10 +150,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="MainDialog.h" />
     <ClInclude Include="MainWindow.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="WebApp.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="MainDialog.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="WebApp.cpp" />
   </ItemGroup>
@@ -161,6 +164,9 @@
     <None Include="html\index.html" />
     <None Include="html\index.js" />
     <None Include="html\style.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Web.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

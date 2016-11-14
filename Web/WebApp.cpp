@@ -5,6 +5,7 @@
  */
 #include "WebApp.h"
 
+#include "MainDialog.h"
 #include "MainWindow.h"
 
 
@@ -16,12 +17,16 @@ CWebApp theApp;
 
 BOOL CWebApp::InitInstance()
 {
+    CMainDialog mainDialog(this);
+    mainDialog.DoModal();
+    return FALSE;
+}
+
+
+void CWebApp::OnNewBrowser()
+{
     CMainWindow *pWindow = new CMainWindow;
     pWindow->Create(nullptr, _T("Hello, Web!"));
-
-    m_pMainWnd = pWindow;
-    m_pMainWnd->UpdateWindow();
-    m_pMainWnd->ShowWindow(m_nCmdShow);
-
-    return TRUE;
+    pWindow->UpdateWindow();
+    pWindow->ShowWindow(SW_SHOW);
 }
