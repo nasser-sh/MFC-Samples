@@ -40,5 +40,8 @@
     <None Include="html\index.js">
       <Filter>Html</Filter>
     </None>
+    <None Include="html\style.css">
+      <Filter>Html</Filter>
+    </None>
   </ItemGroup>
 </Project>
