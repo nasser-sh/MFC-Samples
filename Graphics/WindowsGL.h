@@ -13,8 +13,9 @@
 namespace windowsgl
 {
     void DestroyModernGLContext(HWND hWnd, HGLRC hRC);
-    HGLRC CreateModernGLContext(HDC hDC, int majorVersion, int minorVersion);
-    HGLRC CreateFixedFunctionGLContext(HDC hDC, const PIXELFORMATDESCRIPTOR &pfd);
+    HGLRC CreateModernGLContext(HDC windowhDC, int majorVersion, int minorVersion);
+    HGLRC CreateFixedFunctionGLContext(HDC windowDC);
+    void LoadGLExtensions();
 }
 
 

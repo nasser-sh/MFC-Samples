@@ -26,23 +26,9 @@ int CGLWindow::OnCreate(LPCREATESTRUCT pCreateStruct)
     if (CFrameWnd::OnCreate(pCreateStruct) == -1) {
         return -1;
     }
-
-    PIXELFORMATDESCRIPTOR pfd;
-    ZeroMemory(&pfd, sizeof(pfd));
-
-    pfd.nSize = sizeof(pfd);
-    pfd.nVersion = 1;
-    pfd.dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_GENERIC_ACCELERATED | PFD_DOUBLEBUFFER;
-    pfd.iPixelType = PFD_TYPE_RGBA;
-    pfd.cColorBits = 24;
-    pfd.cRedBits = 8;
-    pfd.cBlueBits = 8;
-    pfd.cGreenBits = 8;
-    pfd.cDepthBits = 32;
-
     
     HDC hDC = GetDC()->GetSafeHdc();
-    m_hGLRC = windowsgl::CreateFixedFunctionGLContext(hDC, pfd);
+    m_hGLRC = windowsgl::CreateFixedFunctionGLContext(hDC);
 
     wglMakeCurrent(hDC, m_hGLRC);
     ffgl::Init();

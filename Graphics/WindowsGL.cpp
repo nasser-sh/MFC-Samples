@@ -6,10 +6,11 @@
 #include "WindowsGL.h"
 
 #include "wglext.h"
+#include <cstring>
+#include <string>
 
 
-PFNWGLCHOOSEPIXELFORMATARBPROC wglChoosePixelFormatARB;
-PFNWGLCREATECONTEXTATTRIBSARBPROC wglCreateContextAttribsARB;
+#define WGL_GET_PROC_ADDRESS(type, name) type name = (type)wglGetProcAddress(#name)
 
 
 namespace
@@ -17,61 +18,22 @@ namespace
     void LoadGLExtensions();
 
 
-    PIXELFORMATDESCRIPTOR GetPFD()
+    PIXELFORMATDESCRIPTOR GetDesiredPixelFormatDescriptor()
     {
-        PIXELFORMATDESCRIPTOR pfd;
-        ZeroMemory(&pfd, sizeof(pfd));
+        PIXELFORMATDESCRIPTOR desiredPixelFormat;
+        std::memset(&desiredPixelFormat, 0, sizeof(desiredPixelFormat));
 
-        pfd.nSize = sizeof(pfd);
-        pfd.nVersion = 1;
-        pfd.dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_GENERIC_ACCELERATED | PFD_DOUBLEBUFFER;
-        pfd.iPixelType = PFD_TYPE_RGBA;
-        pfd.cColorBits = 24;
-        pfd.cRedBits = 8;
-        pfd.cBlueBits = 8;
-        pfd.cGreenBits = 8;
-        pfd.cDepthBits = 32;
+        desiredPixelFormat.nSize = sizeof(desiredPixelFormat);
+        desiredPixelFormat.nVersion = 1;
+        desiredPixelFormat.dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_GENERIC_ACCELERATED | PFD_DOUBLEBUFFER;
+        desiredPixelFormat.iPixelType = PFD_TYPE_RGBA;
+        desiredPixelFormat.cColorBits = 24;
+        desiredPixelFormat.cRedBits = 8;
+        desiredPixelFormat.cBlueBits = 8;
+        desiredPixelFormat.cGreenBits = 8;
+        desiredPixelFormat.cDepthBits = 32;
 
-        return pfd;
-    }
-
-
-    HGLRC LoadCoreGLContext(HDC hDC, int majorVersion, int minorVersion)
-    {
-        float fAttribs[] = {0, 0};
-
-        int pixAttribs[] = {
-            WGL_SUPPORT_OPENGL_ARB, 1,
-            WGL_DRAW_TO_WINDOW_ARB, 1,
-            WGL_RED_BITS_ARB, 8,
-            WGL_GREEN_BITS_ARB, 8,
-            WGL_BLUE_BITS_ARB, 8,
-            WGL_DEPTH_BITS_ARB, 16,
-            WGL_ACCELERATION_ARB, WGL_FULL_ACCELERATION_ARB,
-            WGL_PIXEL_TYPE_ARB, WGL_TYPE_RGBA_ARB,
-            0 };
-
-        int contextAttribs[] = {
-            WGL_CONTEXT_MAJOR_VERSION_ARB, majorVersion,
-            WGL_CONTEXT_MINOR_VERSION_ARB, minorVersion,
-            WGL_CONTEXT_PROFILE_MASK_ARB, WGL_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB,
-            0 };
-
-        PIXELFORMATDESCRIPTOR pfd = GetPFD();
-        int compatibilityFormat = ChoosePixelFormat(hDC, &pfd);
-
-        UINT const nMaxFormats = 1;
-        UINT numFormats;
-        int pixelFormat[nMaxFormats];
-        BOOL result = wglChoosePixelFormatARB(hDC, pixAttribs, fAttribs, nMaxFormats, pixelFormat, &numFormats);
-        
-        if (result && numFormats >= 1) {
-            SetPixelFormat(hDC, pixelFormat[0], &pfd);
-            return wglCreateContextAttribsARB(hDC, nullptr, contextAttribs);
-        } else {
-            SetPixelFormat(hDC, compatibilityFormat, &pfd);
-            return wglCreateContext(hDC);
-        }
+        return desiredPixelFormat;
     }
 
 
@@ -113,13 +75,17 @@ namespace
             UpdateWindow(hWnd_);
 
             hDC_ = GetDC(hWnd_);
-            hRC_ = windowsgl::CreateFixedFunctionGLContext(hDC_, GetPFD());
+            hRC_ = windowsgl::CreateFixedFunctionGLContext(hDC_);
+
+            oldDC_ = wglGetCurrentDC();
+            oldRC_ = wglGetCurrentContext();
+
             wglMakeCurrent(hDC_, hRC_);
         }
 
         ~DummyContext()
         {
-            wglMakeCurrent(0, 0);
+            wglMakeCurrent(oldDC_, oldRC_);
             wglDeleteContext(hRC_);
             DestroyWindow(hWnd_);
         }
@@ -127,7 +93,9 @@ namespace
     private:
         HWND hWnd_;
         HDC hDC_;
+        HDC oldDC_;
         HGLRC hRC_;
+        HGLRC oldRC_;
     };
 
 
@@ -145,38 +113,102 @@ namespace
     }
 
 
+    std::string GetGLExtensionString(HDC windowDC)
+    {
+        DummyContext dummyContext;
+        WGL_GET_PROC_ADDRESS(PFNWGLGETEXTENSIONSSTRINGARBPROC, wglGetExtensionsStringARB);
+        return wglGetExtensionsStringARB(windowDC);
+    }
+
     // wgl* functions need a current context in order for their address to be 
     // retrieved. However, SetPixelFormat() can only be called on a DC once. As
     // a result, we load a fixed function context (See DummyContext implementation)
     // to get the function pointers, and then we use those to create the modern
     // OpenGL context. 
-    void LoadWGLExtensions()
-    {
-        DummyContext dummyContext;
-        wglChoosePixelFormatARB = (PFNWGLCHOOSEPIXELFORMATARBPROC)wglGetProcAddress("wglChoosePixelFormatARB");
-        wglCreateContextAttribsARB = (PFNWGLCREATECONTEXTATTRIBSARBPROC)wglGetProcAddress("wglCreateContextAttribsARB");
-    }
 }
 
 
 namespace windowsgl 
 {
-    HGLRC CreateFixedFunctionGLContext(HDC hDC, const PIXELFORMATDESCRIPTOR &pfd)
+    HGLRC CreateFixedFunctionGLContext(HDC windowDC)
     {
-        int pixelFormat = ChoosePixelFormat(hDC, &pfd);
-        SetPixelFormat(hDC, pixelFormat, &pfd);
-        return wglCreateContext(hDC);
+        PIXELFORMATDESCRIPTOR desiredPixelFormat = GetDesiredPixelFormatDescriptor();
+
+        int pixelFormatIndex = ChoosePixelFormat(windowDC, &desiredPixelFormat);
+        DescribePixelFormat(
+            windowDC,
+            pixelFormatIndex,
+            sizeof(desiredPixelFormat),
+            &desiredPixelFormat);
+        BOOL isPixelFormatSet = SetPixelFormat(
+            windowDC, 
+            pixelFormatIndex, 
+            &desiredPixelFormat);
+
+        if (!isPixelFormatSet) {
+            return NULL;
+        }
+
+        return wglCreateContext(windowDC);
     }
 
 
-    HGLRC CreateModernGLContext(HDC hDC, int majorVersion, int minorVersion)
+    HGLRC CreateModernGLContext(HDC windowDC, int majorVersion, int minorVersion)
     {
-        LoadWGLExtensions();
-        HGLRC hRC = LoadCoreGLContext(hDC, majorVersion, minorVersion);
-        wglMakeCurrent(hDC, hRC);
-        LoadGLExtensions();
-        wglMakeCurrent(NULL, NULL);
-        return hRC;
+        std::string openglExtensions = GetGLExtensionString(windowDC);
+
+        if (openglExtensions.find("WGL_ARB_create_context") == std::string::npos) {
+            return NULL;
+        }
+
+        DummyContext dummyContext;
+        WGL_GET_PROC_ADDRESS(PFNWGLCHOOSEPIXELFORMATARBPROC, wglChoosePixelFormatARB);
+        WGL_GET_PROC_ADDRESS(PFNWGLCREATECONTEXTATTRIBSARBPROC, wglCreateContextAttribsARB);
+        
+        float fAttribs[] = {0, 0};
+
+        int pixAttribs[] = {
+            WGL_SUPPORT_OPENGL_ARB, 1,
+            WGL_DRAW_TO_WINDOW_ARB, 1,
+            WGL_RED_BITS_ARB, 8,
+            WGL_GREEN_BITS_ARB, 8,
+            WGL_BLUE_BITS_ARB, 8,
+            WGL_DEPTH_BITS_ARB, 16,
+            WGL_ACCELERATION_ARB, WGL_FULL_ACCELERATION_ARB,
+            WGL_PIXEL_TYPE_ARB, WGL_TYPE_RGBA_ARB,
+            0 };
+
+        int contextAttributes[] = {
+            WGL_CONTEXT_MAJOR_VERSION_ARB, majorVersion,
+            WGL_CONTEXT_MINOR_VERSION_ARB, minorVersion,
+            WGL_CONTEXT_PROFILE_MASK_ARB, WGL_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB,
+            0 };
+
+        UINT const maxFormatCount = 1;
+        UINT pixelFormatCount;
+        int pixelFormatIndex;
+        BOOL isPixelFormatChosen = wglChoosePixelFormatARB(
+            windowDC, 
+            pixAttribs, 
+            fAttribs, 
+            maxFormatCount, 
+            &pixelFormatIndex, 
+            &pixelFormatCount);
+
+        if (isPixelFormatChosen && pixelFormatCount != 0) {
+            // The next 3 lines are there because SetPixelFormat requires a 
+            // PIXELFORMATDESCRIPTOR* as its last argument...
+            PIXELFORMATDESCRIPTOR dummyPixelFormatDescriptor;
+            std::memset(&dummyPixelFormatDescriptor, 0, sizeof(dummyPixelFormatDescriptor));
+            DescribePixelFormat(windowDC, pixelFormatIndex, sizeof(dummyPixelFormatDescriptor), &dummyPixelFormatDescriptor);
+
+            // ... And we need to call SetPixelFormat(), even before creating
+            // a modern OpenGL context
+            SetPixelFormat(windowDC, pixelFormatIndex, &dummyPixelFormatDescriptor);
+            return wglCreateContextAttribsARB(windowDC, NULL, contextAttributes);
+        }
+
+        return NULL;
     }
 
 
@@ -606,7 +638,7 @@ PFNGLSECONDARYCOLORP3UIPROC glSecondaryColorP3ui;
 PFNGLSECONDARYCOLORP3UIVPROC glSecondaryColorP3uiv;
 
 
-namespace 
+namespace windowsgl
 {
     void LoadGLExtensions()
     {
