@@ -30,7 +30,6 @@ int CModernGLWindow::OnCreate(LPCREATESTRUCT pCreateStruct)
     m_hGLRC = windowsgl::CreateModernGLContext(hDC, 3, 3);
 
     wglMakeCurrent(hDC, m_hGLRC);
-    windowsgl::LoadGLExtensions();
     m_renderer.Init();
     wglMakeCurrent(0, 0);
     return 0;

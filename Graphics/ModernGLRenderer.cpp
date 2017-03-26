@@ -24,40 +24,6 @@ namespace
         is.read(&str[0], length);
         return str;
     }
-
-
-    GLuint Shader(char const *name, GLenum shader_type)
-    {
-        GLuint shader = glCreateShader(shader_type);
-        std::string shaderSource = ReadFile(name);
-        char const *shaderSourceCstr = shaderSource.c_str();
-        glShaderSource(shader, 1, &shaderSourceCstr, nullptr);
-        glCompileShader(shader);
-        return shader;
-    }
-
-
-    GLuint ShaderProgram(char const *vertex, char const *fragment)
-    {
-        GLuint shaders[2];
-        shaders[0] = Shader(vertex, GL_VERTEX_SHADER);
-        shaders[1] = Shader(fragment, GL_FRAGMENT_SHADER);
-
-        GLuint program = glCreateProgram();
-
-        for (auto const &shader : shaders) {
-            glAttachShader(program, shader);
-        }
-
-        glLinkProgram(program);
-
-        for (auto const &shader : shaders) {
-            glDetachShader(program, shader);
-            glDeleteShader(shader);
-        }
-
-        return program;
-    }
 }
 
 
@@ -66,6 +32,8 @@ namespace moderngl {
 
     void CRenderer::Init()
     {
+		LoadGLFunctions();
+
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_MULTISAMPLE);
 
@@ -103,6 +71,40 @@ namespace moderngl {
     void CRenderer::ResizeViewport(int width, int height)
     {
         glViewport(0, 0, width, height);
+    }
+
+
+	GLuint CRenderer::Shader(char const *name, GLenum shader_type)
+    {
+        GLuint shader = glCreateShader(shader_type);
+        std::string shaderSource = ReadFile(name);
+        char const *shaderSourceCstr = shaderSource.c_str();
+        glShaderSource(shader, 1, &shaderSourceCstr, nullptr);
+        glCompileShader(shader);
+        return shader;
+    }
+
+
+    GLuint CRenderer::ShaderProgram(char const *vertex, char const *fragment)
+    {
+        GLuint shaders[2];
+        shaders[0] = Shader(vertex, GL_VERTEX_SHADER);
+        shaders[1] = Shader(fragment, GL_FRAGMENT_SHADER);
+
+        GLuint program = glCreateProgram();
+
+        for (auto const &shader : shaders) {
+            glAttachShader(program, shader);
+        }
+
+        glLinkProgram(program);
+
+        for (auto const &shader : shaders) {
+            glDetachShader(program, shader);
+            glDeleteShader(shader);
+        }
+
+        return program;
     }
 
 } }

@@ -155,6 +155,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="glext.h" />
+    <ClInclude Include="GLFunctions.h" />
     <ClInclude Include="GLRenderer.h" />
     <ClInclude Include="GLWindow.h" />
     <ClInclude Include="GraphicsApp.h" />
@@ -171,6 +172,7 @@
     <ClInclude Include="WindowsGL.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GLFunctions.cpp" />
     <ClCompile Include="GLRenderer.cpp" />
     <ClCompile Include="GLWindow.cpp" />
     <ClCompile Include="GraphicsApp.cpp" />

@@ -6,7 +6,5 @@
 #pragma once
 #ifdef _WIN32
 #include <afxwin.h>
-#include <gl/GL.h>
-#include <gl/GLU.h>
 #include "WindowsGL.h"
 #endif
