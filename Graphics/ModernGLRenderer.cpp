@@ -32,7 +32,7 @@ namespace moderngl {
 
     void CRenderer::Init()
     {
-		LoadGLFunctions();
+        LoadGLFunctions();
 
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_MULTISAMPLE);
@@ -74,7 +74,7 @@ namespace moderngl {
     }
 
 
-	GLuint CRenderer::Shader(char const *name, GLenum shader_type)
+    GLuint CRenderer::Shader(char const *name, GLenum shader_type)
     {
         GLuint shader = glCreateShader(shader_type);
         std::string shaderSource = ReadFile(name);
