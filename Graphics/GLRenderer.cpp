@@ -11,7 +11,7 @@
 namespace graphics {
 namespace ffgl {
 
-    void Init()
+    void CRenderer::Init()
     {
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
@@ -34,7 +34,7 @@ namespace ffgl {
     }
 
 
-    void Draw(CMesh const &mesh)
+    void CRenderer::Draw(CMesh const &mesh)
     {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glVertexPointer(3, GL_FLOAT, 0, &mesh.Vertices().front());
@@ -47,7 +47,7 @@ namespace ffgl {
     }
 
 
-    void ResizeViewport(int width, int height)
+    void CRenderer::ResizeViewport(int width, int height)
     {
         glViewport(0, 0, width, height);
     }

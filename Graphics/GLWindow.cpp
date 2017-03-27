@@ -31,7 +31,7 @@ int CGLWindow::OnCreate(LPCREATESTRUCT pCreateStruct)
     m_hGLRC = windowsgl::CreateFixedFunctionGLContext(hDC);
 
     wglMakeCurrent(hDC, m_hGLRC);
-    ffgl::Init();
+    m_renderer.Init();
     wglMakeCurrent(0, 0);
 
     m_mesh = mesh_loaders::LoadWavefrontObjFile("suzanne.wavefront");
@@ -53,7 +53,7 @@ void CGLWindow::OnPaint()
 {
     HDC hDC = GetDC()->GetSafeHdc();
     wglMakeCurrent(hDC, m_hGLRC);
-    ffgl::Draw(m_mesh);
+    m_renderer.Draw(m_mesh);
     SwapBuffers(hDC);
     wglMakeCurrent(0, 0);
 }
@@ -63,6 +63,6 @@ void CGLWindow::OnSize(UINT nType, int cx, int cy)
 {
     HDC hDC = GetDC()->GetSafeHdc();
     wglMakeCurrent(hDC, m_hGLRC);
-    ffgl::ResizeViewport(cx, cy);
+    m_renderer.ResizeViewport(cx, cy);
     wglMakeCurrent(0, 0);
 }

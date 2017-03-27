@@ -10,10 +10,13 @@
 namespace graphics {
 namespace ffgl {
 
-    void Init();
-    void Draw(CMesh const &mesh);
-    void ResizeViewport(int width, int height);
-
+    class CRenderer
+    {
+    public:
+        void Init();
+        void Draw(CMesh const &mesh);
+        void ResizeViewport(int width, int height);
+    };
 } }
 
 

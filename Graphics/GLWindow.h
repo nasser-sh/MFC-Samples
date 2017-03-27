@@ -5,6 +5,7 @@
  *   directory.
  */
 #include <afxwin.h>
+#include "GLRenderer.h"
 #include "Mesh.h"
 
 
@@ -18,6 +19,7 @@ namespace graphics
 
     private:
         HGLRC m_hGLRC;
+        ffgl::CRenderer m_renderer;
         CMesh m_mesh;
 
     protected:
